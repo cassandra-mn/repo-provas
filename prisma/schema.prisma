@@ -11,9 +11,66 @@ datasource db {
 }
 
 model User {
-  id          Int       @id       @default(autoincrement())
-  email       String    @unique        
-  password    String
+  id                      Int                      @id @default(autoincrement())
+  email                   String                   @unique        
+  password                String    
 
-  @@map("users")
+  @@map("users")    
+}   
+
+model Teacher {   
+  id                      Int                      @id @default(autoincrement())
+  name                    String                   @unique
+  discipline              DisciplineOnTeacher[]
+
+  @@map("teachers")
+}
+
+model Category {
+  id                      Int                      @id @default(autoincrement())
+  name                    String                   @unique
+  test                    Test[]
+
+  @@map("categories")
+}
+
+model Term {
+  id                      Int                      @id @default(autoincrement())
+  number                  Int                      @unique
+  discipline              Discipline[]
+
+  @@map("terms")
+}
+
+model Discipline {
+  id                      Int                      @id @default(autoincrement())
+  name                    String                   @unique
+  termId                  Int              
+  term                    Term                     @relation(fields: [termId], references: [id])
+  teacher                 DisciplineOnTeacher[]
+
+  @@map("disciplines")
+}
+
+model DisciplineOnTeacher {
+  id                      Int                      @id @default(autoincrement())
+  disciplineId            Int            
+  discipline              Discipline               @relation(fields: [disciplineId], references: [id])
+  teacherId               Int            
+  teacher                 Teacher                  @relation(fields: [teacherId], references: [id])
+  test                    Test[]
+
+  @@map("teachersDisciplines")
+}
+
+model Test {
+  id                      Int                      @id @default(autoincrement())
+  name                    String
+  pdfUrl                  String
+  categoryId              Int
+  category                Category                 @relation(fields: [categoryId], references: [id])
+  teacherDisciplineId     Int 
+  teacherDiscipline       DisciplineOnTeacher      @relation(fields: [teacherDisciplineId], references: [id])
+
+  @@map("tests")
 }
