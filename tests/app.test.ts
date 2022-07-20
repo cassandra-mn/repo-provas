@@ -2,7 +2,7 @@ import supertest from 'supertest';
 import app from '../src/app.js';
 import {prisma} from '../src/config/database.js';
 
-beforeEach(async () => {
+beforeAll(async () => {
     await prisma.$executeRaw`TRUNCATE TABLE users`;
 });
 
@@ -18,16 +18,7 @@ describe('tests authentication route', () => {
         expect(result.status).toEqual(201);
     });
 
-    it('returns 200 for valid parameters', async () => {
-        const body = {
-            "email": "teste@email.com",
-            "password": "senha",
-            "confirmPassword": "senha"
-        };
-
-        const result = await supertest(app).post('/sign-up').send(body);
-        expect(result.status).toEqual(201);
-        
+    it('returns 200 for valid parameters', async () => {        
         const login = {
             "email": "teste@email.com",
             "password": "senha"
@@ -51,11 +42,8 @@ describe('tests authentication route', () => {
             "confirmPassword": "senha"
         };
 
-        const firstTry = await supertest(app).post('/sign-up').send(body);
-        expect(firstTry.status).toEqual(201); 
-
-        const secondTry = await supertest(app).post('/sign-up').send(body);
-        expect(secondTry.status).toEqual(409);
+        const result = await supertest(app).post('/sign-up').send(body);
+        expect(result.status).toEqual(409);
     });
 });
 

@@ -11,7 +11,7 @@ interface JWT {
     exp: number;
 }
 
-export async function ensureAuthenticatedMiddleware(req: Request, res: Response, next: NextFunction) {
+export async function validateToken(req: Request, res: Response, next: NextFunction) {
     const {authorization} = req.headers;
     const token = authorization?.replace('Bearer ', '');
     if (!token) return res.status(401).send('token is not valid');
