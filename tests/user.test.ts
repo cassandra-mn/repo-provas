@@ -34,6 +34,13 @@ describe('tests authentication route', () => {
         const result = await agent.post('/sign-up').send(user);
         expect(result.status).toEqual(409);
     });
+
+    it('receive token on login', async () => {
+        const user = await createUser();
+        const response = await supertest(app).post('/sign-in').send(user);
+        const {token} = response.body;
+        expect(token).not.toBeNull();
+      });
 });
 
 afterAll(async () => {
