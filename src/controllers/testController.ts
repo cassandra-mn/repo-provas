@@ -7,3 +7,8 @@ export async function createTest(req: Request, res: Response) {
     await testService.createTest(test);
     res.sendStatus(201);
 }
+
+export async function getTestByDiscipline(req: Request, res: Response) {
+    const tests = await testService.getTestByDiscipline();
+    res.status(200).send(tests);
+}
