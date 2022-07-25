@@ -1,4 +1,4 @@
-# RepoProvas  <a href="https://github.com/cassandra-mn/repo-provas.git"><img src="https://camo.githubusercontent.com/9fc043de59486391ea60800bb55c0442838a476a434a63aff152768f4d172f66/68747470733a2f2f6e6f74696f6e2d656d6f6a69732e73332d75732d776573742d322e616d617a6f6e6177732e636f6d2f70726f642f7376672d747769747465722f31663531322e737667" alt="readme-logo" width="30" height="30"></a>
+# RepoProvas 
 
 ## Usage
 
@@ -21,7 +21,8 @@ $ npm run dev
     - headers: {}
     - body: {
         "email": "email@email.com",
-        "password": "password"
+        "password": "password",
+        "confirmPassword": "password"
       }
     
 - POST /sign-in
