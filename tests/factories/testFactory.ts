@@ -1,7 +1,5 @@
 import {faker} from '@faker-js/faker';
 
-import {prisma} from '../../src/config/database.js';
-
 export function createTestInfo() {
     return {
         name: faker.internet.domainName,
