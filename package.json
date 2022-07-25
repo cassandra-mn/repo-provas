@@ -7,7 +7,7 @@
   "scripts": {
     "build": "npx tsc",
     "dev": "nodemon src/server.ts",
-    "start": "node dist/server.js",
+    "start": "node dist/src/server.js",
     "test": "dotenv -e .env.test prisma migrate dev && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest"
   },
   "prisma": {
