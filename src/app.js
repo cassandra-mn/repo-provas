@@ -1,0 +1,13 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+require("express-async-errors");
+var cors_1 = require("cors");
+var index_js_1 = require("./routers/index.js");
+var errorHandlerMiddleware_js_1 = require("./middlewares/errorHandlerMiddleware.js");
+var app = (0, express_1["default"])();
+app.use((0, express_1.json)());
+app.use((0, cors_1["default"])());
+app.use(index_js_1["default"]);
+app.use(errorHandlerMiddleware_js_1["default"]);
+exports["default"] = app;

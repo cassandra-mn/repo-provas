@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var testController_js_1 = require("../controllers/testController.js");
+var validateSchema_js_1 = require("../middlewares/validateSchema.js");
+var testSchema_js_1 = require("../schemas/testSchema.js");
+var testRouter = (0, express_1.Router)();
+testRouter.post('/test/create', (0, validateSchema_js_1.validateSchemaMiddleware)(testSchema_js_1.testSchema), testController_js_1.createTest);
+testRouter.get('/test/discipline', testController_js_1.getTestByDiscipline);
+testRouter.get('/test/teacher', testController_js_1.getTestByTeacher);
+exports["default"] = testRouter;
